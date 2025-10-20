@@ -15,7 +15,7 @@ const int CHUNK_SIZE= VECTOR_LEN/FRAGMENTS_NUM;
 
 int vector[VECTOR_LEN];
 int sums[FRAGMENTS_NUM];
-int averages[FRAGMENTS_NUM];
+float averages[FRAGMENTS_NUM];
 
 void sumVectorElements(int chunkNum) {
     int start = chunkNum * CHUNK_SIZE;
@@ -70,3 +70,4 @@ int main() {
 
     return 0;
 }
+
