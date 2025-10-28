@@ -1,7 +1,7 @@
 #include "cuda_runtime.h"
-#include <stdio.h>
+#include <iostream>
 
-#define SIZE 4096
+#define SIZE 4100
 #define CHUNK_SIZE 1024
 
 // kernel sumujacy wektory element po elemencie
@@ -39,7 +39,7 @@ int main()
         B[i] = SIZE - i;
     }
 
-    for (int i = 0; i < SIZE; i += CHUNK_SIZE) {
+    for (int i = 0; i < SIZE-CHUNK_SIZE; i += CHUNK_SIZE) {
         // krok 5. transfer wektorów z pamięci RAM CPU do pamięci GPU
         cudaMemcpy(dA, &A[i], chunkSize, cudaMemcpyHostToDevice);
         cudaMemcpy(dB, &B[i], chunkSize, cudaMemcpyHostToDevice);
@@ -52,6 +52,13 @@ int main()
         // krok 7. transfer wektora wynikowego z pamięci GPU do CPU
         cudaMemcpy(&C[i], dC, chunkSize, cudaMemcpyDeviceToHost);
     }
+    int reminder = SIZE % CHUNK_SIZE;
+    int last_chunk = SIZE - reminder;
+    cudaMemcpy(dA, &A[last_chunk], chunkSize, cudaMemcpyHostToDevice);
+    cudaMemcpy(dB, &B[last_chunk], chunkSize, cudaMemcpyHostToDevice);
+    vectorAdd <<<1, 1024>>> (dA, dB, dC, reminder);
+    cudaDeviceSynchronize();
+    cudaMemcpy(&C[last_chunk], dC, reminder * sizeof(int), cudaMemcpyDeviceToHost);
 
     // krok 8. zwrócenie wyników do wyjścia standardowego
     for (int i = 0; i < SIZE; i++)
