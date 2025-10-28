@@ -11,16 +11,10 @@ __global__ void vectorAddSub(int* A, int* B, int* C, int n)
     int warpIdValue = 0;
     warpIdValue = threadIdx.x / 32;
 
-    int i_even_wrap = 2 * (i - warpIdValue * 32);
-    int i_even = 2 * i;
-    if (i_even_wrap % 2 == 0) {
-        C[i_even] = A[i_even] + B[i_even];
-    }
-
-    int i_odd_wrap = 2 * (i - warpIdValue * 32) + 1;
-    int i_odd = 2 * i + 1;
-    if (i_odd_wrap % 2 == 0) {
-        C[i_odd] = A[i_odd] - B[i_odd];
+    if (warpIdValue % 2 == 0) {
+        C[i] = A[i] + B[i];
+    } else {
+        C[i] = A[i] - B[i];
     }
 }
 
@@ -69,3 +63,4 @@ int main()
 
     return 0;
 }
+
