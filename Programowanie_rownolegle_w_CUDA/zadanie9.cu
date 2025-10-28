@@ -56,7 +56,8 @@ int main()
     int last_chunk = SIZE - reminder;
     cudaMemcpy(dA, &A[last_chunk], chunkSize, cudaMemcpyHostToDevice);
     cudaMemcpy(dB, &B[last_chunk], chunkSize, cudaMemcpyHostToDevice);
-    vectorAdd <<<1, 1024>>> (dA, dB, dC, reminder);
+    int blocks = (CHUNK_SIZE + 1024 - 1) / 1024;
+    vectorAdd <<<blocks, 1024>>> (dA, dB, dC, reminder);
     cudaDeviceSynchronize();
     cudaMemcpy(&C[last_chunk], dC, reminder * sizeof(int), cudaMemcpyDeviceToHost);
 
