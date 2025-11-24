@@ -1,0 +1,121 @@
+{
+    "extension": "ncu-proj",
+    "files": [
+        {
+            "is_open": true,
+            "path": "zadanie1.ncu-rep"
+        },
+        {
+            "group_id": "{e6137ffd-3e17-43a2-89a8-0a84e294440b}",
+            "is_open": true,
+            "path": "zadanie2_32_threads.ncu-rep"
+        },
+        {
+            "group_id": "{e6137ffd-3e17-43a2-89a8-0a84e294440b}",
+            "is_open": true,
+            "path": "zadanie2_64_threads.ncu-rep"
+        },
+        {
+            "group_id": "{e6137ffd-3e17-43a2-89a8-0a84e294440b}",
+            "is_open": true,
+            "path": "zadanie2_96_threads.ncu-rep"
+        },
+        {
+            "group_id": "{f18fb49d-eb68-490f-a8c1-579029cc608f}",
+            "is_open": true,
+            "path": "zadanie5_32_threads.ncu-rep"
+        },
+        {
+            "group_id": "{f18fb49d-eb68-490f-a8c1-579029cc608f}",
+            "path": "zadanie5_64_threads.ncu-rep"
+        },
+        {
+            "group_id": "{f18fb49d-eb68-490f-a8c1-579029cc608f}",
+            "path": "zadanie5_96_threads.ncu-rep"
+        }
+    ],
+    "groups": [
+        {
+            "group_id": "{e6137ffd-3e17-43a2-89a8-0a84e294440b}",
+            "group_name": "zadanie_2_3_4"
+        },
+        {
+            "group_id": "{f18fb49d-eb68-490f-a8c1-579029cc608f}",
+            "group_name": "zadanie_5"
+        }
+    ],
+    "launcher": {
+        "activity/interactiveprofile/booststate": "Auto",
+        "activity/interactiveprofile/cachecontrol": "Flush All",
+        "activity/interactiveprofile/clockcontrol": "Base",
+        "activity/interactiveprofile/cpustacksupportoptions": "Native",
+        "activity/interactiveprofile/disableprofilingstartstop": false,
+        "activity/interactiveprofile/enablecpustacksupport": true,
+        "activity/interactiveprofile/enablenvtxsupport": true,
+        "activity/interactiveprofile/enableprofilingfromstart": true,
+        "activity/interactiveprofile/graphprofiling": "Node",
+        "activity/interactiveprofile/importsource": false,
+        "activity/occupancycalculator/file": "",
+        "activity/profile/applyrules": true,
+        "activity/profile/appreplaybuffer": "File",
+        "activity/profile/appreplaymatch": "Grid",
+        "activity/profile/appreplaymode": "Balanced",
+        "activity/profile/booststate": "Auto",
+        "activity/profile/cachecontrol": "Flush All",
+        "activity/profile/checkexitcode": true,
+        "activity/profile/clockcontrol": "Base",
+        "activity/profile/cpustacksupportoptions": "Native",
+        "activity/profile/devices": "",
+        "activity/profile/disableprofilingstartstop": false,
+        "activity/profile/enablecpustacksupport": false,
+        "activity/profile/enablenvtxsupport": false,
+        "activity/profile/enableprofilingfromstart": true,
+        "activity/profile/filtermode": "Global",
+        "activity/profile/forceoverwrite": true,
+        "activity/profile/graphprofiling": "Node",
+        "activity/profile/importsource": false,
+        "activity/profile/kernelid": "",
+        "activity/profile/kernelname": "",
+        "activity/profile/kernelnamebase": "Function",
+        "activity/profile/kill": false,
+        "activity/profile/launchcapturecount": 0,
+        "activity/profile/launchskipbeforematchcount": 0,
+        "activity/profile/launchskipcount": 0,
+        "activity/profile/nvtxincludeexcludeoptions": "",
+        "activity/profile/nvtxpushpopscope": "Thread",
+        "activity/profile/outputfile": "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/nvidia_nsight_compute/zadanie2_64_threads",
+        "activity/profile/pmsamplingbuffersize": 0,
+        "activity/profile/pmsamplinginterval": 0,
+        "activity/profile/pmsamplingmaxpasses": 0,
+        "activity/profile/rangefilteroptions": "",
+        "activity/profile/rangereplayoptions": "",
+        "activity/profile/replaymode": "Kernel",
+        "activity/profile/samplingBufferSize": 33554432,
+        "activity/profile/samplingInterval": 5,
+        "activity/profile/samplingIntervalAuto": true,
+        "activity/profile/samplingMaxPasses": 5,
+        "activity/profile/sourcefolders": "",
+        "activity/profile/targetprocesses": "All",
+        "activity/systemtrace/target/command_line": "\"C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/cmake-build-debug/programowanie_GPU.exe\" ",
+        "activity/systemtrace/target/process_name": "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/cmake-build-debug/programowanie_GPU.exe",
+        "activity/systemtrace/target/working_directory": "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/nvidia_nsight_compute",
+        "platform/linux (x86_64)/device": "",
+        "platform/linux/arguments": "",
+        "platform/linux/environment": "",
+        "platform/linux/executable": "",
+        "platform/linux/workingdir": "",
+        "platform/win32/arguments": "",
+        "platform/win32/environment": "",
+        "platform/win32/executable": "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/cmake-build-debug/programowanie_GPU.exe",
+        "platform/win32/executable/history": [
+            "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/cmake-build-debug/programowanie_GPU.exe"
+        ],
+        "platform/win32/workingdir": "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/nvidia_nsight_compute",
+        "platform/win32/workingdir/history": [
+            "C:/Users/imgres2002/Desktop/studia/magisterskie/semestr_2/programowanie_GPU/nvidia_nsight_compute"
+        ],
+        "platform/windows/device": "localhost"
+    },
+    "uuid": "{d76371be-8e7b-405f-8382-f23c256de7b5}",
+    "version": "1.0"
+}

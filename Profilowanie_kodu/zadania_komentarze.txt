@@ -1,0 +1,63 @@
+1. gpu__time_duration.avg, gpu__cycles_active.avg, dram__bytes_read.sum
+dram__bytes_read.sum [Kbyte]	44.54
+gpu__cycles_active.avg [cycle]	3,797
+gpu__time_duration.avg [us]	3.17
+
+
+2. gpu__time_duration.avg,gpu__cycles_active.avg, dram__bytes_read.sum
+2a. 32 wątki
+dram__bytes_read.sum [Kbyte]	328.19
+gpu__cycles_active.avg [cycle]	4,595
+gpu__time_duration.avg [us]	3.84
+
+2b. 64 wątki
+dram__bytes_read.sum [Kbyte]	368
+gpu__cycles_active.avg [cycle]	4,117
+gpu__time_duration.avg [us]	3.46
+
+2c. 96 wątków
+dram__bytes_read.sum [Kbyte]	267.01
+gpu__cycles_active.avg [cycle]	4,126
+gpu__time_duration.avg [us]	3.42
+
+
+3. najwyższe Achieved Occupancy było dla 96 wątków
+3a. 32 wątki
+Theoretical Occupancy [%]	33.33
+Achieved Occupancy [%]	14.88
+
+3b. 64 wątki
+Theoretical Occupancy [%]	66.67
+Achieved Occupancy [%]	20.73
+
+3c. 96 wątków
+Theoretical Occupancy [%]	100
+Achieved Occupancy [%]	21.86
+
+
+4. gpu__time_duration.avg
+program wykonał się najszybciej dla 96 wątków
+
+4a. 32 wątki
+gpu__time_duration.avg [us]	3.17
+
+4b. 64 wątki
+gpu__time_duration.avg [us]	3.46
+
+4c. 96 wątków
+gpu__time_duration.avg [us]	3.39
+
+
+5. sm__warps_active.avg, smsp__thread_inst_executed_per_inst_executed.ratio
+
+5a. 32 wątki
+sm__warps_active.avg [warp]	13,229.11
+smsp__thread_inst_executed_per_inst_executed.ratio	32
+
+5b. 64 wątki
+sm__warps_active.avg [warp]	17,146.68
+smsp__thread_inst_executed_per_inst_executed.ratio	32
+
+5c. 96 wątków
+sm__warps_active.avg [warp]	18,186.28
+smsp__thread_inst_executed_per_inst_executed.ratio	32
