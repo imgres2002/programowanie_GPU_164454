@@ -14,7 +14,6 @@ __global__ void NaiveMM(float*A, float*C, int N)
     float squaredDifferences = 0.0;
     if (row < N && col < N)
     {
-
         for (int k = 0; k < N; k++) {
             sum += A[row * N + k];
         }

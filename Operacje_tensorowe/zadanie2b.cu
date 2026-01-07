@@ -7,33 +7,35 @@
 // kernel wyznaczający równolegle każdą z wartości w macierzy wynikowej
 __global__ void NaiveMM(float*A, float*C)
 {
-    __shared__ float sA[N];
-    // wiersz oraz kolumna aktualnie pobieranych elementów z macierzy źródłowych
-    int row = blockIdx.y * blockDim.y + threadIdx.y;
-    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    __shared__ float sA[N][N];
+
+    int row = blockIdx.y * N + threadIdx.y;
+    int col = blockIdx.x * N + threadIdx.x;
+
+    // wczytanie do pamięci tymczasowej wykorzystywanych "tiles" z macierzy źródłowych
+    sA[threadIdx.y][threadIdx.x] = A[row * N + (threadIdx.x)];
+
+    // synchronizacja wątków oczekująca na zakończenie wczytywania wymaganych "tiles" źródłowych
+    __syncthreads();
 
     float sum = 0.0;
     float squaredDifferences = 0.0;
-    for(int i = 0; i<N;i++)
-        sA[threadIdx.x] = A[row * N + (i * N + threadIdx.x)];
-    __syncthreads();
-
     if (row < N && col < N)
     {
-
         for (int k = 0; k < N; k++) {
-            sum += sA[row * N + k];
+            sum += sA[row][k];
         }
     }
+
     float mean = sum/N;
     for (int k = 0; k < N; k++) {
-        squaredDifferences += (A[row * N + k] - mean) * (A[row * N + k] - mean);
+        squaredDifferences += (sA[row][k] - mean) * (sA[row][k] - mean);
     }
     float standardDeviation = sqrt(squaredDifferences / N);
     if (row < N && col < N)
     {
         for (int k = 0; k < N; k++) {
-            C[row * N + k] = (A[row * N + k] - mean) / standardDeviation;
+            C[row * N + k] = (sA[row][k] - mean) / standardDeviation;
         }
     }
 }
@@ -53,7 +55,6 @@ int main()
     // wypełnienie tablic wartosciami pseudolosowymi
     for(int i = 0; i<N*N; i++)
     {
-//        h_A[i] = std::rand() % 10;
         h_A[i] = i;
         h_C[i] = 0;
         h_C_gpu[i] = 0;
