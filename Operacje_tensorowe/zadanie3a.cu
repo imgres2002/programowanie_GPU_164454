@@ -10,36 +10,30 @@
 #define TILES_NUM ((N+N)/TILE_SIZE)
 #define TILES_ROWS (N/TILE_SIZE)
 
-// kernel GPU działający w obrębie "tile"
 __global__ void NaiveMM(const float* A, float* C)
 {
-    // tablice 2D przechowujące wszystkie fragmenty macierzy źródłowych
-    // wykorzystywanych w obecnym bloku
-    __shared__ float sA[TILE_SIZE][TILE_SIZE];
+    int tileCol = blockIdx.x;
+    int tileRow = blockIdx.y;
 
-    int row = blockIdx.y * TILE_SIZE + threadIdx.y;
-
-    // wyznaczenie liczby "tiles" w całej macierzy wynikowej
-    int numTiles = N / TILE_SIZE;
-
-    for (int t = 0; t < numTiles; t++) {
-        // wczytanie do pamięci tymczasowej wykorzystywanych "tiles" z macierzy źródłowych
-        sA[threadIdx.y][threadIdx.x] = A[row * N + (t * TILE_SIZE + threadIdx.x)];
-
-        // synchronizacja wątków oczekująca na zakończenie wczytywania wymaganych "tiles" źródłowych
-        __syncthreads();
-
+    // Sprawdzenie, czy nie wychodzimy poza zakres macierzy wynikowej
+    if (tileRow < TILES_ROWS && tileCol < TILES_ROWS) {
         float sum = 0.0f;
+
+        // Bezpośrednie sumowanie z pamięci globalnej
+        // Pętle przechodzą przez obszar przypisany do danego kafelka
         for (int i = 0; i < TILE_SIZE; i++) {
             for (int j = 0; j < TILE_SIZE; j++) {
-                sum += sA[i][j];
+                int globalRow = tileRow * TILE_SIZE + i;
+                int globalCol = tileCol * TILE_SIZE + j;
+
+                // Odczyt bezpośrednio z tablicy A w VRAM
+                sum += A[globalRow * N + globalCol];
             }
         }
 
-        C[blockIdx.y * numTiles + t] = sum;
-
-        // oczekiwanie na zakończenie wyznaczania sum
-        __syncthreads();
+        // Zapis wyniku do tablicy C
+        int tileIdx = tileRow * TILES_ROWS + tileCol;
+        C[tileIdx] = sum;
     }
 }
 
@@ -59,8 +53,8 @@ int main()
 
     cudaMemcpy(d_A, h_A, N*N*sizeof(float), cudaMemcpyHostToDevice);
 
-    dim3 threads(TILE_SIZE, TILE_SIZE);
-    dim3 blocks(1, N / TILE_SIZE);
+    dim3 threads(1, 1);
+    dim3 blocks(TILES_ROWS, TILES_ROWS);
 
     // jak wygląda przydział rozmiaru pamięci współdzielonej?
     NaiveMM<<<blocks, threads>>>(d_A, d_C);
